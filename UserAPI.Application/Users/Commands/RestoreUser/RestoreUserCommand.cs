@@ -6,6 +6,6 @@ namespace UserAPI.Application.Users.Commands.RestoreUser
 	{
 		public string AdminLogin { get; set; }
 		public string AdminPassword { get; set; }
-		public Guid UserId { get; set; }
+		public string Login { get; set; }
 	}
 }

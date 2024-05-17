@@ -19,10 +19,10 @@ namespace UserAPI.Application.Users.Commands.RestoreUser
 			var admin = await _context.Users
 				.FirstOrDefaultAsync(user => user.Login == command.AdminLogin && user.Password == command.AdminPassword, cancellationToken);
 			var user = await _context.Users
-				.FirstOrDefaultAsync(user => user.Guid == command.UserId, cancellationToken);
+				.FirstOrDefaultAsync(user => user.Login == command.Login, cancellationToken);
 
 			if (admin == null) throw new IncorrectUserOrLoginException();
-			if (user == null) throw new UserNotFoundException(command.UserId);
+			if (user == null) throw new UserNotFoundException(command.Login);
 			if (!admin.Admin) throw new AccessRightsException();
 
 			user.RevokedBy = string.Empty;

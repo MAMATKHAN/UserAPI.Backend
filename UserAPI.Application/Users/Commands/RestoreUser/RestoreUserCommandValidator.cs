@@ -8,7 +8,7 @@ namespace UserAPI.Application.Users.Commands.RestoreUser
 		{
 			RuleFor(restoreUserCommand => restoreUserCommand.AdminLogin).NotEmpty().Matches(@"^[A-Za-z0-9]+$");
 			RuleFor(restoreUserCommand => restoreUserCommand.AdminPassword).NotEmpty().Matches(@"^[A-Za-z0-9]+$");
-			RuleFor(restoreUserCommand => restoreUserCommand.UserId).NotEmpty();
+			RuleFor(restoreUserCommand => restoreUserCommand.Login).NotEmpty().Matches(@"^[A-Za-z0-9]+$");
 		}
 	}
 }

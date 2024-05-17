@@ -17,7 +17,7 @@ using UserAPI.WebAPI.Models;
 namespace UserAPI.WebAPI.Controllers
 {
 	[Produces("application/json")]
-	[Route("api/[controller]/[action]")]
+	[Route("api/[controller]")]
 	public class UserController : BaseController
 	{
 		private readonly IMapper _mapper;
@@ -32,7 +32,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример простого запроса:
-		/// GET /user/getActiveUsers/admin/admin
+		/// GET /user/admin/adminLogin/adminPassword
 		/// </remarks>
 		/// <param name="adminLogin">Логин админа(только латинские буквы и цифры) - string</param>
 		/// <param name="adminPassword">Пароль админа(только латински буквы и цифры) - string</param>
@@ -41,7 +41,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// <response code="400">Bad request(запрос не прошел валидацию)</response>
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="403">Forbidden(недостаточно прав)</response>
-		[HttpGet("{adminLogin}/{adminPassword}")]
+		[HttpGet("admin/{adminLogin}/{adminPassword}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -59,7 +59,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример простого запроса:
-		/// GET /user/GetUsersByAge/admin/admin/17
+		/// GET /user/admin/adminLogin/adminPassword/17
 		/// </remarks>
 		/// <param name="adminLogin">Логин админа(только латинские буквы и цифры) - string</param>
 		/// <param name="adminPassword">Пароль админа(только латинские буквы и цифры) - string</param>
@@ -69,7 +69,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// <response code="400">Bad request(запрос не прошел валидацию)</response>
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="403">Forbidden(недостаточно прав)</response>
-		[HttpGet("{adminLogin}/{adminPassword}/{age}")]
+		[HttpGet("admin/getUserByAge/{adminLogin}/{adminPassword}/{age}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -87,7 +87,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример простого запроса:
-		/// GET /user/GetUserByLogin/admin/admin/userLogin
+		/// GET /user/admin/adminLogin/adminPassword/userLogin
 		/// </remarks>
 		/// <param name="adminLogin">Логин админа(только латинские буквы и цифры) - string</param>
 		/// <param name="adminPassword">Пароль админа(только латинские буквы и цифры) - string</param>
@@ -98,7 +98,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="403">Forbidden(недостаточно прав)</response>
 		/// <response code="404">Not found(пользователь не найден)</response>
-		[HttpGet("{adminLogin}/{adminPassword}/{login}")]
+		[HttpGet("admin/{adminLogin}/{adminPassword}/{login}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -117,7 +117,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример простого запроса:
-		/// GET /user/GetUser/admin/admin
+		/// GET /user/admin/userLogin/userPassword
 		/// </remarks>
 		/// <param name="login">Логин пользователя(только латинские буквы и цифры) - string</param>
 		/// <param name="password">Пароль пользователя(только латинские буквы и цифры) - string</param>
@@ -144,7 +144,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример просто запроса:
-		/// POST /user/createUser/admin/admin
+		/// POST /user/admin/adminLogin/adminPassword
 		/// {
 		///		login: "user",
 		///		password: "userPassword123",
@@ -163,7 +163,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="403">Forbidden(недостаточно прав)</response>
 		/// <response code="409">Conflict(такой логин уже существует)</response>
-		[HttpPost("{adminLogin}/{adminPassword}")]
+		[HttpPost("admin/{adminLogin}/{adminPassword}")]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -184,7 +184,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример просто запроса:
-		/// PUT /user/updateUser/admin/admin
+		/// PUT /user/userLogin/userPassword
 		/// {
 		///		userId: "C29E7F3B-11A4-47AA-87E5-3406F8400DFC",
 		///		name: "userName",
@@ -222,7 +222,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример просто запроса:
-		/// PUT /user/updatePassword/admin/admin
+		/// PUT /user/updatePassword/userLogin/userPassword
 		/// {
 		///		userId: "C29E7F3B-11A4-47AA-87E5-3406F8400DFC",
 		///		password: "userPassword",
@@ -237,7 +237,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="404">Not found(пользователь не найден)</response>
 		/// <response code="403">Forbidden(недостаточно прав или пользователь не активен)</response>
-		[HttpPut("{login}/{password}")]
+		[HttpPut("updatePassword/{login}/{password}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -258,7 +258,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример просто запроса:
-		/// PUT /user/updateLogin/admin/admin
+		/// PUT /user/updateLogin/userLogin/userPassword
 		/// {
 		///		userId: "C29E7F3B-11A4-47AA-87E5-3406F8400DFC",
 		///		login: "userLogin",
@@ -273,7 +273,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="404">Not found(пользователь не найден)</response>
 		/// <response code="403">Forbidden(недостаточно прав или пользователь не активен)</response>
-		[HttpPut("{login}/{password}")]
+		[HttpPut("updateLogin/{login}/{password}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -294,37 +294,7 @@ namespace UserAPI.WebAPI.Controllers
 		/// </summary>
 		/// <remarks>
 		/// Пример просто запроса:
-		/// PUT /user/restoreUser/admin/admin/C29E7F3B-11A4-47AA-87E5-3406F8400DF
-		/// </remarks>
-		/// <param name="adminLogin">Логин админа(только латинские буквы и цифры) - string</param>
-		/// <param name="adminPassword">Пароль админа(только латинские буквы и цифры) - string</param>
-		/// <param name="id">id пользователя - guid</param>
-		/// <returns>Возвращает NoContent</returns>
-		/// <response code="204">Succes</response>
-		/// <response code="400">Bad request(запрос не прошел валидацию)</response>
-		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
-		/// <response code="404">Not found(пользователь не найден)</response>
-		/// <response code="403">Forbidden(недостаточно прав)</response>
-		[HttpPut("{adminLogin}/{adminPassword}/{id}")]
-		[ProducesResponseType(StatusCodes.Status204NoContent)]
-		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		[ProducesResponseType(StatusCodes.Status403Forbidden)]
-		public async Task<IActionResult> RestoreUser(string adminLogin, string adminPassword, Guid id)
-		{
-			var command = new RestoreUserCommand { AdminLogin = adminLogin, AdminPassword = adminPassword, UserId = id };
-			await Mediator.Send(command);
-
-			return NoContent();
-		}
-
-		/// <summary>
-		/// Полное удаление пользователя по логину (доступно только админам)
-		/// </summary>
-		/// <remarks>
-		/// Пример просто запроса:
-		/// DELETE /user/fullDelete/admin/admin/userLogin
+		/// PUT /user/admin/adminLogin/adminPassword/userLogin
 		/// </remarks>
 		/// <param name="adminLogin">Логин админа(только латинские буквы и цифры) - string</param>
 		/// <param name="adminPassword">Пароль админа(только латинские буквы и цифры) - string</param>
@@ -335,46 +305,50 @@ namespace UserAPI.WebAPI.Controllers
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="404">Not found(пользователь не найден)</response>
 		/// <response code="403">Forbidden(недостаточно прав)</response>
-		[HttpDelete("{adminLogin}/{adminPassword}/{login}")]
+		[HttpPut("admin/{adminLogin}/{adminPassword}/{login}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status403Forbidden)]
-		public async Task<IActionResult> FullDelete(string adminLogin, string adminPassword, string login)
+		public async Task<IActionResult> RestoreUser(string adminLogin, string adminPassword, string login)
 		{
-			var command = new FullDeleteUserCommand { AdminLogin = adminLogin, AdminPassword = adminPassword, Login = login };
+			var command = new RestoreUserCommand { AdminLogin = adminLogin, AdminPassword = adminPassword, Login = login };
 			await Mediator.Send(command);
 
 			return NoContent();
 		}
 
 		/// <summary>
-		/// Мягкое удаление пользователя по логину (доступно только админам)
+		/// Полное или мягкое удаление пользователя по логину (доступно только админам)
 		/// </summary>
 		/// <remarks>
 		/// Пример просто запроса:
-		/// DELETE /user/softDelete/admin/admin/userLogin
+		/// DELETE /user/admin/adminLogin/adminPassword/userLogin/true
 		/// </remarks>
 		/// <param name="adminLogin">Логин админа(только латинские буквы и цифры) - string</param>
 		/// <param name="adminPassword">Пароль админа(только латинские буквы и цифры) - string</param>
 		/// <param name="login">Логин пользователя(только латинские буквы и цифры) - string</param>
+		/// <param name="isSoftDelete">Мягкое удаление(true), полное удаление(false) - bool</param>
 		/// <returns>Возвращает NoContent</returns>
 		/// <response code="204">Succes</response>
 		/// <response code="400">Bad request(запрос не прошел валидацию)</response>
 		/// <response code="401">Unauthorized(не правильный логин или пароль)</response>
 		/// <response code="404">Not found(пользователь не найден)</response>
 		/// <response code="403">Forbidden(недостаточно прав)</response>
-		[HttpDelete("{adminLogin}/{adminPassword}/{login}")]
+		[HttpDelete("admin/{adminLogin}/{adminPassword}/{login}/{isSoftDelete}")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(StatusCodes.Status403Forbidden)]
-		public async Task<IActionResult> SoftDelete(string adminLogin, string adminPassword, string login)
+		public async Task<IActionResult> FullDelete(string adminLogin, string adminPassword, string login, bool isSoftDelete)
 		{
-			var command = new SoftDeleteUserCommand { AdminLogin = adminLogin, AdminPassword = adminPassword, Login = login };
-			await Mediator.Send(command);
+			var fullDeleteCommand = new FullDeleteUserCommand { AdminLogin = adminLogin, AdminPassword = adminPassword, Login = login };
+			var softDeleteCommand = new SoftDeleteUserCommand { AdminLogin = adminLogin, AdminPassword = adminPassword, Login = login };
+
+			if (isSoftDelete) await Mediator.Send(softDeleteCommand);
+			else await Mediator.Send(fullDeleteCommand);
 
 			return NoContent();
 		}

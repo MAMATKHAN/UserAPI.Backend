@@ -9,7 +9,7 @@ namespace UserAPI.Application.Users.Queries.GetUserByLogin
 		public string Name { get; set; }
 		public int Gender { get; set; }
 		public DateTime? BirthDay { get; set; }
-		public bool Status { get; set; }
+		public bool userIsActive { get; set; }
 
 		public void Mapping(Profile profile)
 		{
@@ -20,7 +20,7 @@ namespace UserAPI.Application.Users.Queries.GetUserByLogin
 					opt => opt.MapFrom(user => user.Gender))
 				.ForMember(userVm => userVm.BirthDay,
 					opt => opt.MapFrom(user => user.BirthDay))
-				.ForMember(userVm => userVm.Status,
+				.ForMember(userVm => userVm.userIsActive,
 					opt => opt.MapFrom(user => string.IsNullOrEmpty(user.RevokedBy)));
 		}
 	}
